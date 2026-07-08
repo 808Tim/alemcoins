@@ -1,0 +1,63 @@
+<div class="app-layout">
+  <!-- Top Navigation Header -->
+  <header class="app-header-shell">
+    <div class="header-container">
+      <a routerLink="/" class="logo-brand">AlemCoins</a>
+      
+      <nav class="nav-links">
+        <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-item">
+          Главная
+        </a>
+        <a routerLink="/catalog" routerLinkActive="active" class="nav-item">
+          Каталог
+        </a>
+        <span class="nav-item disabled" title="Раздел находится в разработке">
+          Корзина <span class="badge-soon">скоро</span>
+        </span>
+        <span class="nav-item disabled" title="Раздел находится в разработке">
+          О нас
+        </span>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Page Content Area -->
+  <main class="main-content">
+    <router-outlet></router-outlet>
+  </main>
+
+  <!-- Global Footer -->
+  <footer class="app-footer-shell">
+    <div class="footer-container">
+      <div class="footer-top">
+        <div class="footer-info">
+          <h2 class="footer-logo">AlemCoins</h2>
+          <p class="footer-tagline">Исторический архив & премиальный нумизматический магазин</p>
+        </div>
+        <div class="footer-links">
+          <div class="footer-link-group">
+            <h4>Магазин</h4>
+            <a routerLink="/catalog">Все монеты</a>
+            <span class="link-placeholder">Новинки</span>
+            <span class="link-placeholder">Редкие монеты</span>
+          </div>
+          <div class="footer-link-group">
+            <h4>Покупателям</h4>
+            <span class="link-placeholder">Доставка и оплата</span>
+            <span class="link-placeholder">Гарантия подлинности</span>
+            <span class="link-placeholder">Связаться с нами</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p class="copyright">&copy; 2026 AlemCoins. Коллекционные монеты Казахстана и мира.</p>
+        <div class="payment-methods">
+          <span class="payment-badge" title="Visa">Visa</span>
+          <span class="payment-badge" title="Mastercard">Mastercard</span>
+          <span class="payment-badge" title="Kaspi">Kaspi QR</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+</div>

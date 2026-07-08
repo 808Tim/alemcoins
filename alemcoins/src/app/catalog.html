@@ -1,0 +1,279 @@
+<div class="catalog-container">
+  <!-- Catalog Sub-header -->
+  <header class="catalog-header">
+    <div class="catalog-header-content">
+      <h1 class="catalog-title">Каталог монет</h1>
+      <p class="catalog-subtitle">Коллекционные и памятные монеты из нашего архива</p>
+
+      <!-- Category Filter Tabs -->
+      <div class="category-tabs" aria-label="Фильтр по коллекциям">
+        @for (cat of categories(); track cat) {
+        <button type="button" class="category-tab" [class.active]="selectedCategory() === cat" (click)="selectCategory(cat)">
+          {{ getCategoryLabel(cat) }}
+        </button>
+        }
+      </div>
+
+      <!-- Stats Panel -->
+      <div class="stats-panel">
+        <div class="stat-item">
+          <span class="stat-value">{{ stats().totalTypes }}</span>
+          <span class="stat-label">Видов монет</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <span class="stat-value">{{ stats().totalQuantity }}</span>
+          <span class="stat-label">Всего штук</span>
+        </div>
+
+        @if (searchTerm()) {
+        <div class="stat-divider highlight"></div>
+        <div class="stat-item highlight">
+          <span class="stat-value">{{ stats().matchedCount }}</span>
+          <span class="stat-label">Найдено видов ({{ stats().totalMatchedQuantity }} шт.)</span>
+        </div>
+        }
+      </div>
+    </div>
+  </header>
+
+  <!-- Controls Section (Search & Sort) -->
+  <section class="controls-section">
+    <div class="controls-wrapper">
+      <!-- Search Box -->
+      <div class="search-box">
+        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input #searchInput type="text" placeholder="Поиск по названию..." (input)="onSearch($event)"
+          class="search-input" aria-label="Поиск монет">
+        @if (searchTerm()) {
+        <button type="button" class="clear-button" (click)="clearSearch(searchInput)" title="Очистить поиск"
+          aria-label="Очистить поиск">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+        }
+      </div>
+
+      <!-- Sort Dropdown -->
+      <div class="sort-box">
+        <label for="sort-select" class="sort-label">Сортировка:</label>
+        <div class="select-wrapper">
+          <select id="sort-select" (change)="onSortChange($event)" class="sort-select" aria-label="Сортировка монет">
+            <option value="default">По умолчанию</option>
+            <option value="name-asc">По названию (А — Я)</option>
+            <option value="name-desc">По названию (Я — А)</option>
+            <option value="qty-desc">Количество (много — мало)</option>
+            <option value="qty-asc">Количество (мало — много)</option>
+          </select>
+          <svg class="select-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Coins Catalog Grid -->
+  <main class="catalog-section">
+    <div class="catalog-grid">
+      @for (coin of paginatedCoins(); track coin.id) {
+      <div class="coin-card" [class.is-flipped]="flippedCoins()[coin.id]" (click)="openDetails(coin)" role="button"
+        tabindex="0" [attr.aria-label]="coin.name + ', подробнее'" (keydown.enter)="openDetails(coin)">
+        <!-- 3D Card Inner -->
+        <div class="card-inner">
+          <!-- Front Face -->
+          <div class="card-face card-front">
+            @if (coin.quantity > 0) {
+            <span class="quantity-badge" [class.rare]="coin.quantity <= 1">
+              {{ coin.quantity }} шт.
+            </span>
+            }
+
+            <div class="coin-image-container">
+              @if (coin.image1) {
+              <img [src]="coin.image1" [alt]="coin.name" class="coin-img" loading="lazy">
+              } @else {
+              <div class="coin-placeholder">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <path d="M12 6v12M6 12h12"></path>
+                </svg>
+              </div>
+              }
+            </div>
+
+            <div class="coin-info">
+              <h2 class="coin-name">{{ coin.name }}</h2>
+            </div>
+
+            <!-- Card Actions -->
+            <div class="card-actions">
+              @if (coin.image2) {
+              <button type="button" class="flip-trigger-btn" (click)="toggleFlip(coin.id, $event)"
+                title="Повернуть монету" aria-label="Повернуть монету">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round">
+                  <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"></path>
+                </svg>
+                <span>Реверс</span>
+              </button>
+              }
+            </div>
+          </div>
+
+          <!-- Back Face (if image2 exists) -->
+          <div class="card-face card-back">
+            @if (coin.quantity > 0) {
+            <span class="quantity-badge" [class.rare]="coin.quantity <= 1">
+              {{ coin.quantity }} шт.
+            </span>
+            }
+
+            <div class="coin-image-container">
+              @if (coin.image2) {
+              <img [src]="coin.image2" [alt]="coin.name + ' - Реверс'" class="coin-img" loading="lazy">
+              } @else {
+              <div class="coin-placeholder">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <path d="M12 6v12M6 12h12"></path>
+                </svg>
+              </div>
+              }
+            </div>
+
+            <div class="coin-info">
+              <h2 class="coin-name">{{ coin.name }} (Реверс)</h2>
+            </div>
+
+            <!-- Card Actions -->
+            <div class="card-actions">
+              @if (coin.image2) {
+              <button type="button" class="flip-trigger-btn" (click)="toggleFlip(coin.id, $event)"
+                title="Повернуть монету" aria-label="Повернуть монету">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round">
+                  <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"></path>
+                </svg>
+                <span>Аверс</span>
+              </button>
+              }
+            </div>
+          </div>
+        </div>
+      </div>
+      }
+    </div>
+
+    <!-- Pagination Controls -->
+    @if (totalPages() > 1) {
+    <nav class="pagination-container" aria-label="Навигация по каталогу">
+      <button type="button" class="btn-page btn-arrow" [disabled]="currentPage() === 1" (click)="prevPage()"
+        aria-label="Предыдущая страница">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+          stroke-linejoin="round">
+          <polyline points="15 18 9 12 15 6"></polyline>
+        </svg>
+      </button>
+
+      <div class="page-numbers">
+        @for (page of pages(); track page) {
+        <button type="button" class="btn-page" [class.active]="currentPage() === page" (click)="setPage(page)">
+          {{ page }}
+        </button>
+        }
+      </div>
+
+      <button type="button" class="btn-page btn-arrow" [disabled]="currentPage() === totalPages()" (click)="nextPage()"
+        aria-label="Следующая страница">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+          stroke-linejoin="round">
+          <polyline points="9 18 15 12 9 6"></polyline>
+        </svg>
+      </button>
+    </nav>
+    }
+
+    <!-- Empty State -->
+    @if (filteredCoins().length === 0) {
+    <div class="empty-state">
+      <div class="empty-icon-wrapper">
+        <svg class="empty-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"
+          stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="8" y1="12" x2="16" y2="12"></line>
+        </svg>
+      </div>
+      <h3 class="empty-title">Монеты не найдены</h3>
+      <p class="empty-message">Попробуйте изменить поисковый запрос или сбросить фильтр.</p>
+    </div>
+    }
+  </main>
+
+  <!-- Detailed Modal Dialog -->
+  @if (selectedCoin(); as coin) {
+  <div class="modal-backdrop" (click)="closeDetails()" role="dialog" aria-modal="true">
+    <div class="modal-container" (click)="$event.stopPropagation()">
+      <!-- Close Button -->
+      <button type="button" class="modal-close" (click)="closeDetails()" aria-label="Закрыть">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+          stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h2 class="modal-title">{{ coin.name }}</h2>
+        <div class="modal-meta">
+          <span class="modal-quantity" [class.rare]="coin.quantity <= 1">
+            В коллекции: <strong>{{ coin.quantity }} шт.</strong>
+          </span>
+          <span class="modal-id-badge">ID: #{{ coin.id }}</span>
+        </div>
+      </div>
+
+      <!-- Modal Body Content -->
+      <div class="modal-body">
+        <div class="coin-display-layout" [class.single-image]="!coin.image2">
+          <!-- Side 1: Front -->
+          <div class="coin-side-display">
+            <h3 class="side-heading">Аверс</h3>
+            <div class="modal-img-wrapper">
+              @if (coin.image1) {
+              <img [src]="coin.image1" [alt]="coin.name" class="modal-coin-img">
+              } @else {
+              <div class="modal-coin-placeholder">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <path d="M12 6v12M6 12h12"></path>
+                </svg>
+              </div>
+              }
+            </div>
+          </div>
+
+          <!-- Side 2: Back (if present) -->
+          @if (coin.image2) {
+          <div class="coin-side-display">
+            <h3 class="side-heading">Реверс</h3>
+            <div class="modal-img-wrapper">
+              <img [src]="coin.image2" [alt]="coin.name + ' - Реверс'" class="modal-coin-img">
+            </div>
+          </div>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+  }
+</div>

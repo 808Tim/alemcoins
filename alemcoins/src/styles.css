@@ -1,0 +1,82 @@
+/* Global Styles for AlemCoins - Premium Museum Archive Style Guide */
+
+:root {
+  /* Color Palette */
+  --bg-primary: #faf9f6; /* Premium Alabaster off-white background */
+  --bg-secondary: #ffffff; /* Card / Panel background */
+  --bg-input: #f7f5ee; /* Input / secondary background */
+  
+  --color-primary: #5c061c; /* Deep Wine Burgundy */
+  --color-secondary: #b89753; /* Antique Museum Gold */
+  --color-dark: #2d2522; /* Espresso Dark Brown */
+  --color-gold-light: #f5efeb; /* Soft gold-beige */
+  
+  --color-badge-rare: #5c061c; /* Burgundy for Rare */
+  --color-badge-limit: #2d2522; /* Espresso for Limited */
+  
+  --text-primary: #2d2522; /* Espresso Brown for main text */
+  --text-secondary: #70635f; /* Muted Warm Brown/Grey */
+  --text-muted: #a89b97;
+  --text-white: #ffffff;
+  
+  --border-light: #e5e2da; /* Light beige-grey border */
+  --border-gold: #b89753; /* Gold border for highlights */
+  --border-dark: #2d2522; /* Dark border */
+  
+  /* Fonts */
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body: 'Work Sans', sans-serif;
+  
+  /* Transitions */
+  --transition-smooth: all 0.2s ease-out;
+  --transition-bounce: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  background-color: var(--bg-primary);
+  background-image:
+    linear-gradient(rgba(184, 151, 83, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(184, 151, 83, 0.02) 1px, transparent 1px),
+    radial-gradient(circle at 0% 0%, rgba(184, 151, 83, 0.04) 0%, transparent 60%),
+    radial-gradient(circle at 100% 100%, rgba(92, 6, 28, 0.03) 0%, transparent 60%);
+  background-size: 80px 80px, 80px 80px, 100% 100%, 100% 100%;
+  background-attachment: fixed;
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(212, 175, 55, 0.3);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-gold);
+}
+
+/* Smooth Focus Rings */
+*:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 2px;
+}

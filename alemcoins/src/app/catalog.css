@@ -1,0 +1,901 @@
+/* Catalog Component Styles for AlemCoins - Museum Archive Style */
+
+.catalog-container {
+  display: flex;
+  flex-direction: column;
+}
+
+/* ==========================================
+   Header & Stats Section
+   ========================================== */
+.catalog-header {
+  padding: 1.5rem 1rem 2.5rem;
+  text-align: center;
+  position: relative;
+}
+
+.catalog-title {
+  font-family: var(--font-display);
+  font-size: 3.2rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.01em;
+}
+
+.catalog-subtitle {
+  color: var(--color-secondary);
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 2.5rem;
+  font-weight: 600;
+}
+
+.category-tabs {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 2.5rem;
+  padding: 0 1rem;
+}
+
+.category-tab {
+  background: transparent;
+  border: 1px solid var(--border-light);
+  color: var(--text-secondary);
+  padding: 0.6rem 1.35rem;
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  border-radius: 0; /* Strict sharp tag */
+  transition: var(--transition-smooth);
+}
+
+.category-tab:hover {
+  border-color: var(--color-secondary);
+  color: var(--color-primary);
+  background: rgba(184, 151, 83, 0.02);
+}
+
+.category-tab.active {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: var(--text-white);
+  box-shadow: 3px 3px 0 rgba(92, 6, 28, 0.12);
+}
+
+.stats-panel {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-light);
+  padding: 0.75rem 2rem;
+  border-radius: 0; /* Strict sharp corners */
+  gap: 1.5rem;
+  box-shadow: 0 4px 15px rgba(45, 37, 34, 0.04);
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.stat-value {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+.stat-label {
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-top: 0.15rem;
+  font-weight: 600;
+}
+
+.stat-divider {
+  width: 1px;
+  height: 25px;
+  background: var(--border-light);
+}
+
+.stat-divider.highlight {
+  background: var(--color-secondary);
+}
+
+.stat-item.highlight .stat-value {
+  color: var(--color-primary);
+  text-shadow: 0 0 1px rgba(92, 6, 28, 0.1);
+}
+
+/* ==========================================
+   Controls (Search & Sort)
+   ========================================== */
+.controls-section {
+  margin: 1rem 0 2.5rem;
+  padding: 0 1rem;
+}
+
+.controls-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--bg-secondary);
+  padding: 1.25rem 2rem;
+  border-radius: 0; /* Strict sharp corners */
+  border: 1px solid var(--border-light);
+  box-shadow: 0 4px 15px rgba(45, 37, 34, 0.03);
+}
+
+.search-box {
+  position: relative;
+  flex: 1;
+  min-width: 280px;
+  display: flex;
+  align-items: center;
+}
+
+.search-icon {
+  position: absolute;
+  left: 1.25rem;
+  width: 18px;
+  height: 18px;
+  color: var(--text-secondary);
+  pointer-events: none;
+  transition: var(--transition-smooth);
+}
+
+.search-input {
+  width: 100%;
+  padding: 0.85rem 1.25rem 0.85rem 3rem;
+  background: var(--bg-input);
+  border: 1px solid var(--border-light);
+  border-radius: 0; /* Strict sharp corners */
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: var(--transition-smooth);
+}
+
+.search-input::placeholder {
+  color: var(--text-muted);
+}
+
+.search-input:focus {
+  border-color: var(--color-primary);
+  background: var(--bg-secondary);
+  box-shadow: 4px 4px 0 rgba(92, 6, 28, 0.08);
+  outline: none;
+}
+
+.search-input:focus + .search-icon {
+  color: var(--color-primary);
+}
+
+.clear-button {
+  position: absolute;
+  right: 1rem;
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 0.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition-smooth);
+  border-radius: 0;
+}
+
+.clear-button:hover {
+  color: var(--color-primary);
+  background: rgba(45, 37, 34, 0.05);
+}
+
+.clear-button svg {
+  width: 16px;
+  height: 16px;
+}
+
+.sort-box {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.sort-label {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+.select-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.sort-select {
+  appearance: none;
+  -webkit-appearance: none;
+  background: var(--bg-input);
+  border: 1px solid var(--border-light);
+  border-radius: 0; /* Strict sharp corners */
+  padding: 0.85rem 3rem 0.85rem 1.25rem;
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  min-width: 240px;
+  transition: var(--transition-smooth);
+}
+
+.sort-select:focus {
+  border-color: var(--color-primary);
+  background: var(--bg-secondary);
+  outline: none;
+  box-shadow: 4px 4px 0 rgba(92, 6, 28, 0.08);
+}
+
+.select-arrow {
+  position: absolute;
+  right: 1.25rem;
+  width: 16px;
+  height: 16px;
+  color: var(--text-secondary);
+  pointer-events: none;
+  transition: var(--transition-smooth);
+}
+
+.sort-select:focus + .select-arrow {
+  color: var(--color-primary);
+  transform: rotate(180deg);
+}
+
+/* ==========================================
+   Catalog Grid & Coin Cards
+   ========================================== */
+.catalog-section {
+  padding: 0 1rem 3rem;
+  flex: 1;
+}
+
+.catalog-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  gap: 2.5rem;
+}
+
+.coin-card {
+  perspective: 1500px;
+  height: 340px;
+  cursor: pointer;
+  position: relative;
+  border-radius: 0; /* Strict sharp corners */
+  outline: none;
+  transition: var(--transition-smooth);
+}
+
+.coin-card:hover {
+  transform: translateY(-3px);
+}
+
+.card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.65s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
+}
+
+/* 3D Flip Execution */
+.coin-card.is-flipped .card-inner {
+  transform: rotateY(180deg);
+}
+
+/* Ensure the visible card face is on top and catches pointer events */
+.coin-card:not(.is-flipped) .card-front {
+  z-index: 2;
+  pointer-events: auto;
+}
+.coin-card:not(.is-flipped) .card-back {
+  z-index: 1;
+  pointer-events: none;
+}
+
+.coin-card.is-flipped .card-front {
+  z-index: 1;
+  pointer-events: none;
+}
+.coin-card.is-flipped .card-back {
+  z-index: 2;
+  pointer-events: auto;
+}
+
+.card-face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-light);
+  border-radius: 0; /* Strict sharp corners */
+  padding: 1.5rem 1.25rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  box-shadow: 0 4px 10px rgba(45, 37, 34, 0.02);
+  transition: var(--transition-smooth);
+}
+
+.coin-card:hover .card-face {
+  border-color: var(--color-secondary);
+  box-shadow: 0 12px 30px rgba(184, 151, 83, 0.08), 5px 5px 0 rgba(184, 151, 83, 0.12); /* Sharp offset gold shadow */
+}
+
+.coin-card:focus-visible .card-face {
+  border-color: var(--color-primary);
+  box-shadow: 4px 4px 0 rgba(92, 6, 28, 0.08);
+}
+
+.card-back {
+  transform: rotateY(180deg);
+  background: var(--bg-secondary);
+}
+
+.coin-image-container {
+  position: relative;
+  width: 170px;
+  height: 170px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  padding: 0;
+}
+
+.coin-img {
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: 50%;
+  object-fit: contain;
+  filter: drop-shadow(0 8px 15px rgba(45, 37, 34, 0.12));
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), filter 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.coin-card:hover .coin-img {
+  transform: scale(1.04);
+  filter: drop-shadow(0 12px 20px rgba(45, 37, 34, 0.18));
+}
+
+.coin-placeholder {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: rgba(184, 151, 83, 0.04);
+  border: 1px dashed var(--color-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-secondary);
+}
+
+.coin-placeholder svg {
+  width: 40px;
+  height: 40px;
+}
+
+/* Quantity badge positioned absolute top-right of card face */
+.quantity-badge {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  z-index: 10;
+  background: var(--color-dark); /* Espresso Dark Brown badge */
+  color: var(--text-white);
+  padding: 0.35rem 0.8rem;
+  border-radius: 0; /* Strict sharp tag */
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  font-weight: 700;
+  box-shadow: 2px 2px 0 rgba(45, 37, 34, 0.1);
+  letter-spacing: 0.04em;
+  transition: var(--transition-smooth);
+}
+
+.quantity-badge.rare {
+  background: var(--color-primary); /* Wine Burgundy badge for rare */
+  box-shadow: 2px 2px 0 rgba(92, 6, 28, 0.15);
+}
+
+.coin-card:hover .quantity-badge {
+  transform: translateY(-1px);
+}
+
+.coin-info {
+  width: 100%;
+  margin-top: 0.75rem;
+  text-align: center;
+}
+
+.coin-name {
+  font-family: var(--font-display); /* Playfair Display headings */
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  line-height: 1.35;
+  margin-bottom: 0.25rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  height: 3.2rem;
+}
+
+.card-actions {
+  width: 100%;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: auto; /* Push to bottom of card face */
+}
+
+/* Outlined Gold / Burgundy Pill Flip Trigger Button */
+.flip-trigger-btn {
+  position: relative;
+  z-index: 10;
+  background: transparent;
+  border: 1px solid var(--color-secondary);
+  color: var(--color-primary);
+  padding: 0.4rem 1.1rem;
+  border-radius: 0; /* Strict sharp button */
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.flip-trigger-btn:hover {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: var(--text-white);
+  box-shadow: 3px 3px 0 rgba(92, 6, 28, 0.12);
+}
+
+.flip-trigger-btn svg {
+  width: 12px;
+  height: 12px;
+}
+
+/* ==========================================
+   Empty State
+   ========================================== */
+.empty-state {
+  text-align: center;
+  padding: 5rem 2rem;
+  background: var(--bg-secondary);
+  border-radius: 0; /* Strict sharp corners */
+  border: 1px solid var(--border-light);
+  margin-top: 1rem;
+  box-shadow: 0 4px 15px rgba(45, 37, 34, 0.02);
+}
+
+.empty-icon-wrapper {
+  width: 80px;
+  height: 80px;
+  border-radius: 0; /* Strict square icon wrapper */
+  background: var(--bg-input);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+  margin-bottom: 1.5rem;
+  border: 1px solid var(--border-light);
+}
+
+.empty-icon {
+  width: 35px;
+  height: 35px;
+}
+
+.empty-title {
+  font-family: var(--font-display);
+  font-size: 1.7rem;
+  color: var(--color-primary);
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+}
+
+.empty-message {
+  color: var(--text-secondary);
+  max-width: 400px;
+  margin: 0 auto;
+  font-size: 0.95rem;
+}
+
+/* ==========================================
+   Detailed Modal Dialog
+   ========================================== */
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(45, 37, 34, 0.5); /* Espresso Dark Warm overlay shadow */
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  animation: fadeIn 0.25s ease-out;
+}
+
+.modal-container {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-gold); /* Antique Gold border outline */
+  border-radius: 0; /* Strict sharp container */
+  width: 100%;
+  max-width: 900px;
+  max-height: 90vh;
+  box-shadow: 0 15px 45px rgba(45, 37, 34, 0.15), 6px 6px 0 rgba(184, 151, 83, 0.1);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  animation: scaleIn 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+  overflow: hidden;
+}
+
+.modal-close {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  background: var(--bg-input);
+  border: 1px solid var(--border-light);
+  color: var(--text-secondary);
+  width: 38px;
+  height: 38px;
+  border-radius: 0; /* Strict square close button */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  z-index: 1010;
+}
+
+.modal-close:hover {
+  background: var(--color-primary);
+  color: var(--text-white);
+  border-color: var(--color-primary);
+}
+
+.modal-header {
+  padding: 2.2rem 2.5rem 1.5rem;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.modal-title {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin-bottom: 0.5rem;
+  padding-right: 3rem;
+  line-height: 1.3;
+}
+
+.modal-meta {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.modal-quantity {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  background: var(--bg-input);
+  padding: 0.35rem 0.9rem;
+  border-radius: 0; /* Strict sharp corners */
+  border: 1px solid var(--border-light);
+}
+
+.modal-quantity.rare {
+  border-color: rgba(92, 6, 28, 0.18);
+  background: rgba(92, 6, 28, 0.03);
+}
+
+.modal-quantity strong {
+  color: var(--color-primary);
+}
+
+.modal-id-badge {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.modal-body {
+  padding: 2.5rem;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.coin-display-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+}
+
+.coin-display-layout.single-image {
+  grid-template-columns: 1fr;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.coin-side-display {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.side-heading {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-secondary);
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border-light);
+  padding-bottom: 0.4rem;
+  width: 100%;
+  text-align: center;
+  font-weight: 700;
+}
+
+.modal-img-wrapper {
+  width: 250px;
+  height: 250px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  border: none;
+  margin-bottom: 2rem;
+}
+
+.modal-coin-img {
+  max-width: 90%;
+  max-height: 90%;
+  object-fit: contain;
+  border-radius: 50%;
+  filter: drop-shadow(0 10px 20px rgba(45, 37, 34, 0.12));
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), filter 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.modal-coin-img:hover {
+  transform: scale(1.06) rotate(1deg);
+  filter: drop-shadow(0 15px 25px rgba(45, 37, 34, 0.2));
+}
+
+.modal-coin-placeholder {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  background: rgba(184, 151, 83, 0.04);
+  border: 1px dashed var(--border-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+}
+
+.modal-coin-placeholder svg {
+  width: 50px;
+  height: 50px;
+}
+
+/* ==========================================
+   Animations
+   ========================================== */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scaleIn {
+  from { transform: scale(0.97); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+/* ==========================================
+   Pagination Controls
+   ========================================== */
+.pagination-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 3.5rem 0 1.5rem;
+  padding: 0 1rem;
+}
+
+.page-numbers {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+.btn-page {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-light);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 600;
+  width: 42px;
+  height: 42px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  border-radius: 0; /* Strict sharp square buttons */
+}
+
+.btn-page:hover:not([disabled]):not(.active) {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+  background: var(--bg-input);
+}
+
+.btn-page.active {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: var(--text-white);
+  box-shadow: 3px 3px 0 rgba(92, 6, 28, 0.12); /* Sharp premium offset shadow */
+}
+
+.btn-page[disabled] {
+  opacity: 0.35;
+  cursor: not-allowed;
+  background: var(--bg-input);
+}
+
+.btn-arrow svg {
+  width: 16px;
+  height: 16px;
+  color: inherit;
+  display: block;
+}
+
+/* ==========================================
+   Responsive Adaptations
+   ========================================== */
+@media (max-width: 1024px) {
+  .catalog-title {
+    font-size: 2.8rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .catalog-title {
+    font-size: 2.4rem;
+  }
+  .catalog-subtitle {
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+  }
+  .stats-panel {
+    padding: 0.7rem 1.5rem;
+    gap: 1rem;
+  }
+  .stat-value {
+    font-size: 1.3rem;
+  }
+  .controls-wrapper {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 1.25rem;
+    gap: 1.25rem;
+  }
+  .search-box {
+    min-width: 100%;
+  }
+  .sort-box {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.5rem;
+  }
+  .sort-select {
+    width: 100%;
+  }
+  .catalog-grid {
+    grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+    gap: 1.5rem;
+  }
+  .coin-card {
+    height: 320px;
+  }
+  .coin-image-container {
+    width: 150px;
+    height: 150px;
+  }
+  .coin-name {
+    font-size: 1.15rem;
+  }
+  
+  /* Modal stacked on mobile */
+  .coin-display-layout {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  .modal-container {
+    max-height: 95vh;
+  }
+  .modal-body {
+    padding: 1.5rem 1.25rem;
+  }
+  .modal-header {
+    padding: 1.5rem 1.25rem 1rem;
+  }
+  .modal-title {
+    font-size: 1.6rem;
+  }
+  .modal-img-wrapper {
+    margin-bottom: 1rem;
+    height: 200px;
+    width: 200px;
+  }
+}
+
+@media (max-width: 480px) {
+  .stats-panel {
+    width: 100%;
+    flex-wrap: wrap;
+  }
+  .stat-item {
+    flex: 1;
+    min-width: 40%;
+  }
+  .stat-divider {
+    display: none;
+  }
+  .catalog-grid {
+    grid-template-columns: 1fr;
+  }
+}
